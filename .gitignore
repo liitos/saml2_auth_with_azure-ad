@@ -1,0 +1,7 @@
+conf/*
+*.tar*
+*.zip
+ms_saml/
+__pycache__
+*-workspace
+launch.sh
