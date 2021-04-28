@@ -7,11 +7,8 @@
   <li>Email: {{ current_user.email }}</li>
   <a class="button" href="/logout">Logout</a>
 
-  <!--<form action="{{url_for('flask_saml2_sp.logout')}}" method="POST"><input type="submit" value="Log out"></form>-->
-
   {% else %}
   <p>You're not logged in. Use Azure SSO login at:</p>
-  <!--<a class="button" href="{{ url_for('flask_saml2_sp.login') }}">Azure SSO Login</a>-->
 
   <a class="button" href="/login">Azure SSO Login</a>  
 {% endif %}

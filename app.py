@@ -56,9 +56,12 @@ login_manager.init_app(app)
 # Very volatile userdb
 userdb = {}
 
-# This is required for Flask login
+
 @login_manager.user_loader
 def load_user(user_id):
+    '''
+    Flask login mechanism requires this
+    '''
     if user_id in userdb:
         return userdb[user_id]
     else:
@@ -66,21 +69,32 @@ def load_user(user_id):
 
 @app.route("/", methods=['GET'])
 def index():
+    '''
+    User session status is checked in the Jinja template
+    '''
     return render_template('index.html')
 
 @app.route("/login", methods=['GET'])
 def login():
+    '''
+    SAML Assertion generation is delegated to flask_saml2
+    '''
     return redirect(url_for('flask_saml2_sp.login'), code=302)
 
 @app.route("/logout", methods=['GET'])
 @login_required
 def logout():
+    '''
+    Logs out user locally, but doesn't do SLO.
+    '''
     logout_user()
-    # Let's not do SLO here
     return redirect(url_for("index"))
 
 @app.route("/sso", methods=['GET'])
 def sso():
+    ''' 
+    Handler for the actual SAML response. 
+    '''
     # At this point, signature should already be checked by the framework
     auth_data = sp.get_auth_data_in_session()
 

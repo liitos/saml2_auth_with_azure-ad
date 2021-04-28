@@ -11,6 +11,6 @@ Following environment variables needs to be set before running:
 ```
 export ENTITY_ID="XXX"
 export SSO_URL="YYY"
-export SLO_URL="YYY"
+export SLO_URL="ZZZ"
 
 ```
